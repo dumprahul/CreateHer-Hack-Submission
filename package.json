@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@zkpass/transgate-js-sdk": "^0.4.0",
     "clsx": "^2.1.1",
     "motion": "^12.0.0-alpha.1",
     "next": "15.0.3",
