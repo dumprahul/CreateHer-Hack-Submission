@@ -6,7 +6,7 @@ import {
   ModalContent,
   ModalFooter,
   ModalTrigger,
-} from "../ui/animated-modal";
+} from "../../components/ui/animated-modal";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
