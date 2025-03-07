@@ -1,13 +1,14 @@
 import { Actor, HttpAgent } from "@dfinity/agent";
-import { idlFactory, canisterId } from "../../canisters/backend/backend.did.js";
+import { idlFactory } from "../../canisters/src/declarations/backend/backend.did"; // Import auto-generated DID file
+// ../../.dfx/local/canisters/backend/backend.did.js
 
-const setupAgent = async () => {
-  const agent = await HttpAgent.create({
-    host: "http://127.0.0.1:4943", // Local replica
-  });
+const CANISTER_ID = "b77ix-eeaaa-aaaaa-qaada-cai"; // Replace with your actual Canister ID
 
-  return Actor.createActor(idlFactory, { agent, canisterId });
-};
+// Create the agent using the new method
+const agent = await HttpAgent.create({ host: "http://127.0.0.1:4943" });
 
-// Export a function that returns the canister actor
-export default setupAgent;
+// Create the actor
+export const backendActor = Actor.createActor(idlFactory, {
+  agent,
+  canisterId: CANISTER_ID,
+});
