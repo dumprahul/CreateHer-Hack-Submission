@@ -1,10 +1,14 @@
 "use client";
 import { motion } from "motion/react";
-import { HeroHighlight, Highlight } from "../ui/hero-highlight";
+import { HeroHighlight, Highlight } from "./hero-highlight";
+import { AnimatedModalDemo } from "./AnimatedModalDemo";
 
 export function HeroHighlightDemo() {
   return (
     <HeroHighlight>
+      <h1 className="text-2xl px-4 md:text-4xl mt-2 lg:text-9xl font-bold text-neutral-700 font-sans dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto " >
+      SheFunded
+      </h1>
       <motion.h1
         initial={{
           opacity: 0,
@@ -18,16 +22,15 @@ export function HeroHighlightDemo() {
           duration: 0.5,
           ease: [0.4, 0.0, 0.2, 1],
         }}
-        className="text-2xl px-4 md:text-4xl lg:text-5xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto "
-      >
-        With insomnia, nothing&apos;s real. Everything is far away. Everything
-        is a{" "}
+        className="text-2xl px-4 md:text-4xl lg:text-2xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto " >
+        A decentralised platform where your idea — not your identity — gets you funded through{" "}
         <Highlight className="text-black dark:text-white">
-          copy, of a copy, of a copy.
+          Zero Knowledge Proofs and ICP
         </Highlight>
       </motion.h1>
+      <div className="relative mt-3 ">
+        <AnimatedModalDemo />
+      </div>
     </HeroHighlight>
   );
 }
-
-//s
