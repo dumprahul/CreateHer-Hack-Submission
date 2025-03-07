@@ -1,5 +1,8 @@
+"use client"
+
 import { useState, useEffect } from "react";
-import { backendActor } from "../../utils/icp"; // Import the actor from utils/icp.js
+import { backendActor } from "@/utils/icp";
+ // Import the actor from utils/icp.js
 
 function Counter() {
   const [count, setCount] = useState(0);
