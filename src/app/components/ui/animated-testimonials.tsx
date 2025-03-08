@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { ColourfulText } from "../../components/ui/colourful-text";
 
 
+
 type Testimonial = {
   quote: string;
   name: string;
