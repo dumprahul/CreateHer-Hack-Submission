@@ -24,6 +24,7 @@ const secondaryVariant = {
     opacity: 1,
   },
 };
+
 export const FileUpload = ({
   onChange,
 }: {
@@ -172,7 +173,6 @@ export const FileUpload = ({
     </div>
   );
 };
-
 
 export function GridPattern() {
   const columns = 10;

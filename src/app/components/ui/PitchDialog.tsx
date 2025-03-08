@@ -9,11 +9,50 @@ import {
   ModalFooter,
   ModalTrigger,
 } from "./animated-modal";
+import axios from 'axios'; 
+import { backendActor } from "../../../utils/icp";
+
 
 export function PitchDialog() {
   const [title, setTitle] = useState("");
   const [problemStatement, setProblemStatement] = useState("");
   const [proposedSolution, setProposedSolution] = useState("");
+  const [ipfsLink, setIpfsLink] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
+
+  // Log IPFS link when it's uploaded
+  const handleIpfsLinkUpload = (link: string) => {
+    console.log("Received IPFS link: ", link);
+    setIpfsLink(link);
+  };
+
+  // Submit form logic (when the submit button is clicked)
+  const handleSubmit = async () => {
+    if (!title || !problemStatement || !proposedSolution || !ipfsLink) {
+      alert("Please fill in all the fields.");
+      return;
+    }
+
+    try {
+      // Assuming backendActor.storeIdea is your backend call
+      const ideaName = title;
+      const description = proposedSolution;
+      const pptLink = ipfsLink;  // Use IPFS link as ppt link
+
+      
+      const ideaId = await backendActor.storeIdea(ideaName, description, problemStatement, pptLink);
+      setMessage(`✅ Idea stored successfully with ID: ${ideaId}`);
+
+      // Clear form values after successful submission
+      setTitle("");
+      setProblemStatement("");
+      setProposedSolution("");
+      setIpfsLink("");
+    } catch (error) {
+      console.error("Error storing idea: ", error);
+      setMessage("❌ Something went wrong. Please try again.");
+    }
+  };
 
   return (
     <div className="flex items-center justify-center">
@@ -26,12 +65,10 @@ export function PitchDialog() {
         <ModalBody>
           <ModalContent>
             <h4 className="text-lg md:text-2xl text-neutral-600 dark:text-neutral-100 font-bold text-center mb-6">
-            Can you be {" "}
-            {/* <ColourfulText text="PITCH PERFECT ? "/> */}
-            <span className="px-1 py-0.5 rounded-md bg-gray-100 dark:bg-neutral-800 dark:border-neutral-700 border border-gray-200">
-                Pitch perfect ? 
+              Can you be {" "}
+              <span className="px-1 py-0.5 rounded-md bg-gray-100 dark:bg-neutral-800 dark:border-neutral-700 border border-gray-200">
+                Pitch perfect ?
               </span>
-
             </h4>
 
             {/* Form Fields */}
@@ -75,19 +112,29 @@ export function PitchDialog() {
                   className="w-full mt-1 p-2 border rounded-lg bg-gray-100 dark:bg-gray-800 dark:text-white"
                 />
               </div>
+
+              {/* File Upload Demo Component */}
               <div>
-                <FileUploadDemo/>
+                <FileUploadDemo onIpfsLinkUpload={handleIpfsLinkUpload} />
               </div>
             </div>
 
-          {/* Footer Buttons */}          
-            {/* <button className="bg-black text-white dark:bg-white ml-50 mt-3 dark:text-black text-sm px-4 py-2 rounded-md border border-black w-28">
-              Submit
-            </button> */}
-            <button className="shadow-[0_0_0_3px_#000000_inset] mt-2 px-6 py-2 bg-transparent border border-black dark:border-white dark:text-white text-black rounded-lg font-bold transform hover:-translate-y-1 transition duration-400">
-                Submit 
-            </button>
-          
+            {/* Footer Buttons */}
+            <div className="mt-4">
+              <button
+                onClick={handleSubmit}
+                className="shadow-[0_0_0_3px_#000000_inset] px-6 py-2 bg-transparent border border-black dark:border-white dark:text-white text-black rounded-lg font-bold transform hover:-translate-y-1 transition duration-400"
+              >
+                Submit
+              </button>
+            </div>
+
+            {/* Show message after submission */}
+            {message && (
+              <div className="mt-4 text-center">
+                <p>{message}</p>
+              </div>
+            )}
           </ModalContent>
         </ModalBody>
       </Modal>

@@ -49,7 +49,7 @@ export function FileUploadDemo({ onIpfsLinkUpload }: { onIpfsLinkUpload: (link: 
       setIpfsLink(ipfsUrl);
       console.log("IPFS URL:", ipfsUrl);
 
-      // Pass the IPFS link to the parent component or another module
+      // Pass the IPFS link to the parent component
       if (onIpfsLinkUpload) {
         onIpfsLinkUpload(ipfsUrl);
       }
