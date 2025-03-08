@@ -24,7 +24,6 @@ const secondaryVariant = {
     opacity: 1,
   },
 };
-
 export const FileUpload = ({
   onChange,
 }: {
@@ -36,6 +35,12 @@ export const FileUpload = ({
   const handleFileChange = (newFiles: File[]) => {
     setFiles((prevFiles) => [...prevFiles, ...newFiles]);
     onChange && onChange(newFiles);
+
+    // Create URL for each uploaded file and log it
+    newFiles.forEach((file) => {
+      const fileURL = URL.createObjectURL(file);
+      console.log(`File uploaded: ${file.name}, URL: ${fileURL}`);
+    });
   };
 
   const handleClick = () => {
@@ -167,6 +172,7 @@ export const FileUpload = ({
     </div>
   );
 };
+
 
 export function GridPattern() {
   const columns = 10;

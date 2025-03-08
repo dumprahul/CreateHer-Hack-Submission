@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { FileUpload } from "./file-upload";
 import axios from "axios";
 
-export function FileUploadDemo() {
+export function FileUploadDemo({ onIpfsLinkUpload }: { onIpfsLinkUpload: (link: string) => void }) {
   const [files, setFiles] = useState<File[]>([]);
   const [uploadStatus, setUploadStatus] = useState<string>("");
   const [ipfsLink, setIpfsLink] = useState<string>("");
@@ -47,8 +47,12 @@ export function FileUploadDemo() {
 
       setUploadStatus("File Uploaded Successfully!");
       setIpfsLink(ipfsUrl);
-      console.log("IPFS URL:", ipfsUrl);  // You can use this IPFS link wherever needed
+      console.log("IPFS URL:", ipfsUrl);
 
+      // Pass the IPFS link to the parent component or another module
+      if (onIpfsLinkUpload) {
+        onIpfsLinkUpload(ipfsUrl);
+      }
     } catch (error) {
       console.error("Error uploading file: ", error);
       setUploadStatus("Upload failed. Please try again.");
