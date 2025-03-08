@@ -1,41 +1,65 @@
 "use client";
+// import React from "react";
+// // import { SparklesCore } from "@/components/ui/Sparkles";
+// import { GlobeDemo } from "../components/ui/GlobeDemo";
+// // import { CanvasRevealEffectDemo } from "@/components/ui/CanvasRevealEffectDemo";
+// import { AnimatedTestimonialsDemo } from "../components/ui/AnimatedTestimonialsDemo";
+// import { FeaturesSectionDemo } from "../components/ui/FeaturesSectionDemo";
+// // import { Vortex } from "@/components/ui/vortex";
+// import { HeroHighlightDemo } from "../components/ui/HeroHighlightDemo";
 
-import { motion } from "framer-motion";
 import React from "react";
-import { useState } from "react"
-import { AuroraBackground } from "./components/aurora-background";
-import { startVerification } from "./components/startverification";
+import { GlobeDemo } from "./components/ui/GlobeDemo";
+import { AnimatedTestimonialsDemo } from "./components/ui/AnimatedTestimonialsDemo";
+import { FeaturesSectionDemo } from "./components/ui/FeaturesSectionDemo";
+import { HeroHighlightDemo } from "./components/ui/HeroHighlightDemo";
+import { BackgroundLines } from "./components/ui/background-lines";
 
-export default function AuroraBackgroundDemo() {
-  const [result, setResult] = useState<any>()
+export default function HomePage() {
   return (
-    <AuroraBackground>
-      <motion.div
-        initial={{ opacity: 0.0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{
-          delay: 0.3,
-          duration: 0.8,
-          ease: "easeInOut",
-        }}
-        className="relative flex flex-col gap-4 items-center justify-center px-4"
-      >
-        <div className="text-3xl md:text-7xl font-bold dark:text-white text-center text-white">
-          verify your identity through zk.
-        </div>
-        <div className="font-extralight text-base md:text-4xl dark:text-neutral-200 py-4 text-white">
-          Click verify to get verified without revealing your details.
-        </div>
-        
-        <button className="bg-black dark:bg-white rounded-full w-fit text-white dark:text-black px-4 py-2" onClick={() => startVerification(setResult)} >
-          Verify your X 
-        </button>
-        {result && <pre className="text-white">{JSON.stringify(result, null, 2)}</pre>}
+    <div className="w-full bg-black">
+<BackgroundLines className="flex items-center justify-center w-full flex-col px-4">
+<section className="h-screen flex flex-col overflow-hidden items-center justify-center relative">
+        <HeroHighlightDemo />
+      </section>
+    </BackgroundLines>  
 
-      </motion.div>
-    </AuroraBackground>
+      <section className="min-h-screen flex items-center justify-center">
+        <GlobeDemo />
+      </section>
+
+      <section className="relative py-5">      
+      <FeaturesSectionDemo />
+      </section>
+
+      <section className="h-screen flex items-center justify-center mt-[-9rem]">
+        <AnimatedTestimonialsDemo />
+    </section>
+<hr></hr>
+    {/* Footer Section */}
+<footer className="w-full bg-black text-white py-8">
+  <div className="max-w-7xl mx-auto px-6 text-center">
+    <h3 className="text-xl md:text-2xl font-semibold">SheFunded</h3>
+    <p className="text-sm md:text-base text-neutral-400 mt-2">
+      Building the future, one block at a time.
+    </p>
+    <div className="flex justify-center gap-4 mt-4">
+      <a href="#" className="text-neutral-400 hover:text-white transition">
+        Privacy Policy
+      </a>
+      <a href="#" className="text-neutral-400 hover:text-white transition">
+        Terms of Service
+      </a>
+      <a href="#" className="text-neutral-400 hover:text-white transition">
+        Contact
+      </a>
+    </div>
+    <p className="text-xs text-neutral-500 mt-2">
+      ©️ {new Date().getFullYear()} SheFunded. All rights reserved.
+    </p>
+  </div>
+</footer>
+
+    </div>
   );
 }
-
-
-//s
